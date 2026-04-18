@@ -41,8 +41,8 @@ jobs:
 
         echo "Đang build image: $FULL_IMAGE_PATH:$IMAGE_TAG"
         
-        # Build image từ Dockerfile.batch nằm trong thư mục spark
-        docker build -t $FULL_IMAGE_PATH:latest -t $FULL_IMAGE_PATH:$IMAGE_TAG -f spark/Dockerfile.batch spark/
+        # Build image từ Dockerfile.serving nằm trong thư mục serving
+        docker build -t $FULL_IMAGE_PATH:latest -t $FULL_IMAGE_PATH:$IMAGE_TAG -f serving/Dockerfile.serving serving/
 
         echo "Đang push image lên Artifact Registry..."
         docker push $FULL_IMAGE_PATH --all-tags
