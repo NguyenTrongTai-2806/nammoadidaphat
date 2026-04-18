@@ -42,7 +42,7 @@ jobs:
         echo "Đang build image: $FULL_IMAGE_PATH:$IMAGE_TAG"
         
         # Build image từ Dockerfile.streaming nằm trong thư mục streaming
-        docker build -t $FULL_IMAGE_PATH:latest -t $FULL_IMAGE_PATH:$IMAGE_TAG -f streaming/Dockerfile.streaming streaming/
+        docker build -t $FULL_IMAGE_PATH:latest -t $FULL_IMAGE_PATH:$IMAGE_TAG -f streaming/Dockerfile.spark streaming/
 
         echo "Đang push image lên Artifact Registry..."
         docker push $FULL_IMAGE_PATH --all-tags
