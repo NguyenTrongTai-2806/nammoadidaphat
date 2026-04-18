@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airflow-dags
+data:
+  weather_batch_dag.py: |
+    from datetime import datetime
+    from airflow import DAG
+    from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
+    from kubernetes.client import models as k8s
+    from airflow.kubernetes.secret import Secret
+
+    default_args = {'owner': 'airflow', 'start_date': datetime(2023, 1, 1)}
+    secret_minio_user = Secret('env', 'MINIO_ROOT_USER', 'storage-secrets', 'minio-user')
+    secret_minio_pass = Secret('env', 'MINIO_ROOT_PASSWORD', 'storage-secrets', 'minio-pass')
+
+    # Lập lịch chạy lúc 0h00 mỗi ngày
+    with DAG('weather_batch_dag', default_args=default_args, schedule_interval='0 0 * * *', catchup=False) as dag:
+        
+        # Gọi trực tiếp Image chứa Spark Batch
+        run_batch = KubernetesPodOperator(
+            namespace='default',
+            image='asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-batch:v2',
+            # cmds=["/opt/spark/bin/spark-submit", 
+            #   "--driver-memory", "512m", 
+            #   "spark_batch.py"],
+            name="spark-batch-pod",
+            task_id="run_spark_batch",
+            get_logs=True,
+            image_pull_policy='Always', 
+            in_cluster=True,
+            is_delete_operator_pod=False, # Giữ lại Pod sau khi chạy xong để dễ xem log
+            container_resources=k8s.V1ResourceRequirements(   
+                requests={"memory": "256Mi", "cpu": "50m"},
+                limits={"memory": "1536Mi", "cpu": "1000m"}
+            ),
+            secrets=[secret_minio_user, secret_minio_pass],
+            # 3. phiên bản Python để PySpark giao tiếp
+            env_vars={
+                "PYSPARK_PYTHON": "python3",
+                "PYSPARK_DRIVER_PYTHON": "python3"
+            }
+        )

@@ -1,0 +1,13 @@
+FROM python:3.9-slim
+
+# Chuyển vào thư mục làm việc
+WORKDIR /app
+
+# Cài đặt 2 thư viện cần thiết để crawler gửi dữ liệu lên Kafka
+RUN pip install --no-cache-dir requests kafka-python
+
+# Copy file code từ máy tính vào bên trong Image
+COPY crawler.py .
+
+# Lệnh để chạy code khi khởi động
+CMD ["python", "crawler.py"]
