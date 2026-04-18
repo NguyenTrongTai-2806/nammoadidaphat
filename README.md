@@ -27,6 +27,7 @@ Cách xem giao diện của các pod: Do k để chế độ LoadBalancer nên s
 - Minio:   kubectl port-forward svc/minio 9001:9001
 - airflow: kubectl port-forward svc/airflow 8080:8080
 - serving: kubectl port-forward svc/serving-service 8000:8000
-(sau đó truy cập vào http://localhost:<port>)
+- 
+(sau đó truy cập vào http://localhost:5601) or 9001 or 8080 or 8000 
 
 *Note: K nên tự ý sửa lại schema hay đường dẫn tránh làm hỏng cả hệ thống. Nếu có lỗi gì báo lại Tài
