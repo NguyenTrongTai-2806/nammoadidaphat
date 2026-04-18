@@ -8,7 +8,7 @@ spec:
   type: Python
   pythonVersion: "3"
   mode: cluster
-  image: "asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-streaming:v1"
+  image: "asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-streaming:latest"
   imagePullPolicy: Always 
   mainApplicationFile: "local:///opt/spark/work-dir/spark_streaming.py"
   sparkVersion: "3.5.0"

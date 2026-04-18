@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: spark-batch
-        image: asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-batch:v2
+        image: asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-batch:latest
         imagePullPolicy: Always
         env:
         - name: ES_HOST

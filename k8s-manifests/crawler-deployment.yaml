@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: crawler
-        image: "asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-weather-crawler:v5"
+        image: "asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-weather-crawler:latest"
         resources:
           requests: 
             memory: "128Mi"

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fastapi-container
-        image: asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/serving-api:v1
+        image: asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/serving-api:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000

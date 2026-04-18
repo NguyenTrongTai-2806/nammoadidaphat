@@ -20,7 +20,7 @@ data:
         # Gọi trực tiếp Image chứa Spark Batch
         run_batch = KubernetesPodOperator(
             namespace='default',
-            image='asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-batch:v2',
+            image='asia-southeast1-docker.pkg.dev/bigdata-k8s-project/bigdata-repo/my-spark-batch:latest',
             # cmds=["/opt/spark/bin/spark-submit", 
             #   "--driver-memory", "512m", 
             #   "spark_batch.py"],
